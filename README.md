@@ -26,7 +26,6 @@ Este proyecto permite al usuario explorar un entorno de quirófano y validar su 
 3. Ejecuta la escena principal `Assets/Scenes/Main.unity`.
 
 ## Créditos
-- Personaje: Unity Robot Kyle
 - Modelos 3D y entorno: Recursos de libre acceso y de diseño propio en Blender
 - Inspiración: Resolución 3100 del Ministerio de Salud de Colombia
 
