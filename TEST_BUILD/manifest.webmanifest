@@ -1,6 +1,6 @@
 {
-    "name": "Medvision",
-    "short_name": "Medvision",
+    "name": "MedVision3D",
+    "short_name": "MedVision3D",
     "start_url": "index.html",
     "display": "fullscreen",
     "background_color": "#231F20",

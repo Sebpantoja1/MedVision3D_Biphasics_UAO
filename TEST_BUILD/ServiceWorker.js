@@ -1,9 +1,9 @@
-const cacheName = "Biphasics-Medvision-0.1.0";
+const cacheName = "Biphasics-MedVision3D-0.0.2";
 const contentToCache = [
     "Build/TEST_BUILD.loader.js",
-    "Build/TEST_BUILD.framework.js.br",
-    "Build/TEST_BUILD.data.br",
-    "Build/TEST_BUILD.wasm.br",
+    "Build/TEST_BUILD.framework.js",
+    "Build/TEST_BUILD.data",
+    "Build/TEST_BUILD.wasm",
     "TemplateData/style.css"
 
 ];
