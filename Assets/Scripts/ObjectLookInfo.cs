@@ -27,10 +27,8 @@ public class ObjectLookInfo : MonoBehaviour
                 if (hit.transform == targetObject)
                 {
                     infoCanvas.SetActive(true);
-
-                    // Opcional: hacer que el canvas mire a la cámara para mejor visibilidad
                     infoCanvas.transform.LookAt(mainCamera.transform);
-                    infoCanvas.transform.Rotate(0, 180, 0); // Ajustar rotación si es necesario
+                    infoCanvas.transform.Rotate(0, 180, 0);
                 }
                 else
                 {
