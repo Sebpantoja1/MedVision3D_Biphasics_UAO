@@ -15,6 +15,9 @@ public class ObjectLookOverlay : MonoBehaviour
 
     public GameObject canvasFinal;
 
+    public Transform jugador; // arrastra aquí el GameObject del jugador
+    public Transform nuevaPosicion; // define un GameObject vacío en la nueva posición deseada
+
     private bool puedeInteractuar = false;
 
     void Start()
@@ -59,11 +62,27 @@ public class ObjectLookOverlay : MonoBehaviour
         puedeInteractuar = false;
     }
 
+    
+    public void MoverJugadorANuevaPosicion()
+    {
+        jugador.position = nuevaPosicion.position;
+        jugador.rotation = nuevaPosicion.rotation;
+        canvasFinal.SetActive(false); // Opcional: ocultar canvas final
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     public void MostrarOverlay()
     {
         presionarEUI.SetActive(false);
         infoOverlayUI.SetActive(true);
+
+        // Pausar el juego
+        Time.timeScale = 0f;
+
+        // Bloquear movimiento de cámara
         camaraControl.camaraBloqueada = true;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -72,6 +91,10 @@ public class ObjectLookOverlay : MonoBehaviour
     {
         infoOverlayUI.SetActive(false);
 
+        // Reanudar el juego
+        Time.timeScale = 1f;
+
+        // Restaurar control de cámara
         if (camaraControl != null)
             camaraControl.enabled = true;
 
@@ -88,11 +111,13 @@ public class ObjectLookOverlay : MonoBehaviour
 
     public void MostrarCanvasFinal()
     {
-    infoOverlayUI.SetActive(false);
-    canvasFinal.SetActive(true);
+        infoOverlayUI.SetActive(false);
+        canvasFinal.SetActive(true);
 
-    // Liberar el cursor, si es necesario para interacción con UI
-    Cursor.lockState = CursorLockMode.None;
-    Cursor.visible = true;
+        // Reanudar el juego (por seguridad)
+        Time.timeScale = 1f;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
