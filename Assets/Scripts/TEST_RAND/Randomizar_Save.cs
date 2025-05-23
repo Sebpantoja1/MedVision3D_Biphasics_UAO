@@ -7,7 +7,7 @@ public class ReglaObjeto
     public Transform[] posiblesPosiciones;
     public bool puedeDesactivarse;
 }
-public class RandomizadorDeObjetos : MonoBehaviour
+public class Randomizar_Save : MonoBehaviour
 {
 
     public ReglaObjeto[] reglas;
