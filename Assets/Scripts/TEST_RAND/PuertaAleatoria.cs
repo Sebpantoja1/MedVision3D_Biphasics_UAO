@@ -9,7 +9,7 @@ public class PuertaAleatoria : MonoBehaviour
     public GameObject puertaSinVisor;
     public ElementoVerificable elementoVerificable;
 
-    void Start()
+    public void puertaAleatoria()
     {
         bool usarConVisor = Random.value > 0.5f;
         puertaConVisor.SetActive(usarConVisor);
