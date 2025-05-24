@@ -26,6 +26,6 @@ public class GeneradorMedidasQuirófano : MonoBehaviour
 
         largoEval.ConfigurarEstado(largo >= 5f);
         anchoEval.ConfigurarEstado(ancho >= 4f);
-        altoEval.ConfigurarEstado(alto >= 2.8f);
+        altoEval.ConfigurarEstado(alto >= 3f);
     }
 }
