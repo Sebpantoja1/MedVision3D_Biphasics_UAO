@@ -1,18 +1,16 @@
-// ========================
-// Script: TermohigrometroRandom.cs
-// ========================
 using UnityEngine;
-using TMPro;
 
 public class TermohigrometroRandom : MonoBehaviour
 {
-    public TextMeshProUGUI temperaturaTexto;
-    public ElementoVerificable temperaturaEval;
-
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        float temperatura = Random.Range(15f, 30f);
-        temperaturaTexto.text = temperatura.ToString("F1") + " °C";
-        temperaturaEval.ConfigurarEstado(temperatura >= 20f && temperatura <= 25f);
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
