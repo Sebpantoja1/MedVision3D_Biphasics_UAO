@@ -54,5 +54,22 @@ public class TemporizadorConOverlay : MonoBehaviour
             canvasTemporizador.SetActive(false);
 
         canvasCuestionario.SetActive(true);
+
+        // 🔒 Pausar el tiempo para detener movimiento del juego
+        //Time.timeScale = 0f;
+
+        // 🖱️ Desbloquear cursor y hacerlo visible
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
+    public void CerrarCuestionario()
+    {
+        canvasCuestionario.SetActive(false);
+        //Time.timeScale = 1f;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+    }
+
 }

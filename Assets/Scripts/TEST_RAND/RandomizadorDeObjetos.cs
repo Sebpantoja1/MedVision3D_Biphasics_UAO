@@ -17,7 +17,7 @@ public class RandomizadorDeObjetos : MonoBehaviour
 
     public List<ObjetoRandomizable> objetos;
 
-    void Start()
+    public void EjecutarAleatoriedad()
     {
         foreach (var item in objetos)
         {
