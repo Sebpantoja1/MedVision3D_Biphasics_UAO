@@ -2,22 +2,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class Cuestionario : MonoBehaviour
 {
     [System.Serializable]
     public class Pregunta
     {
-        public string nombreElemento;              // Nombre legible del elemento (para mostrar en la retroalimentación)
-        public ElementoVerificable elemento;       // Componente que contiene la verificación
+        public string nombreElemento;              // Nombre legible del elemento o grupo
+        public ElementoVerificable elemento;       // Componente individual
+        public GrupoVerificable elementos;         // Grupo de objetos
         public Toggle toggleRespuesta;             // Respuesta seleccionada por el usuario
     }
 
     public List<Pregunta> preguntas;
     public TextMeshProUGUI resultadoTexto;
-    public TextMeshProUGUI retroalimentacionTexto; // Texto donde se mostrarán los errores
-    public GameObject canvasRetroalimentacion;     // Canvas que muestra la retroalimentación
-    public GameObject canvasCuestionario; // CuestionarioKill
+    public TextMeshProUGUI retroalimentacionTexto;
+    public GameObject canvasRetroalimentacion;
+    public GameObject canvasCuestionario;
+    public GameObject canvasRecept;
+    public GameObject canvasBordes;
+    public GameObject canvasTermo;
+    public GameObject canvasGases;
+    public GameObject canvasAlarma;
 
     public void EvaluarCuestionario()
     {
@@ -27,7 +35,19 @@ public class Cuestionario : MonoBehaviour
 
         foreach (var pregunta in preguntas)
         {
-            bool estadoCorrecto = pregunta.elemento.EstaCorrecto();
+            bool estadoCorrecto = true;
+
+            // 👤 Si es un elemento individual
+            if (pregunta.elemento != null)
+            {
+                estadoCorrecto = pregunta.elemento.EstaCorrecto();
+            }
+            // 👥 Si es un grupo de elementos
+            else if (pregunta.elementos != null)
+            {
+                estadoCorrecto = pregunta.elementos.GrupoCorrecto();
+            }
+
             bool respuestaUsuario = pregunta.toggleRespuesta.isOn;
 
             if (estadoCorrecto == respuestaUsuario)
@@ -36,7 +56,19 @@ public class Cuestionario : MonoBehaviour
             }
             else
             {
-                errores.Add($"❌ {pregunta.nombreElemento} — Estado incorrecto.");
+                // Obtener detalles de error si es grupo
+                if (pregunta.elementos != null)
+                {
+                    var detalles = pregunta.elementos.ObtenerErrores();
+                    foreach (var detalle in detalles)
+                    {
+                        errores.Add($"❌ {pregunta.nombreElemento} — {detalle}");
+                    }
+                }
+                else
+                {
+                    errores.Add($"❌ {pregunta.nombreElemento} — Estado incorrecto.");
+                }
             }
         }
 
@@ -60,13 +92,43 @@ public class Cuestionario : MonoBehaviour
         canvasCuestionario.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Time.timeScale = 0f; // Detiene el juego si lo deseas
+        Time.timeScale = 0f;
+    }
+
+    public void NextCanvasRecept()
+    {
+        canvasRetroalimentacion.SetActive(false);
+        canvasRecept.SetActive(true);
+
+    }
+    public void NextCanvasAlarma()
+    {
+        canvasRecept.SetActive(false);
+        canvasAlarma.SetActive(true);
+
+    }
+    public void NextCanvasBordes()
+    {
+        canvasAlarma.SetActive(false);
+        canvasBordes.SetActive(true);
+
+    }
+    public void NextCanvasTermo()
+    {
+        canvasBordes.SetActive(false);
+        canvasTermo.SetActive(true);
+
+    }
+    public void NextCanvasGases()
+    {
+        canvasTermo.SetActive(false);
+        canvasGases.SetActive(true);
+
     }
 
     public void Finalizar()
     {
-        // Opcional: recargar escena o cerrar canvas
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("MenuScene");
     }
 }
